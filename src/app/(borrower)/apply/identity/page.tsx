@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight, Camera, Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 const livenessPrompts = [
   'Please center your face in the frame.',
@@ -78,7 +79,10 @@ export default function IdentityPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="relative w-64 h-64 rounded-full border-4 border-dashed border-primary flex items-center justify-center overflow-hidden">
+            <div className={cn(
+              "relative w-64 h-64 rounded-full border-4 flex items-center justify-center overflow-hidden transition-all",
+              livenessComplete ? "border-solid border-green-500" : "border-dashed border-primary animate-pulse"
+            )}>
                 <video ref={videoRef} className="w-full h-full object-cover scale-[1.7]" autoPlay muted playsInline />
                 {!livenessComplete && <div className="absolute inset-0 bg-black/30" />}
             </div>
